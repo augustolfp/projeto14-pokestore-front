@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import logo from "../img/logo.png";
+import logo from "../assets/img/logo.png";
 import dotenv from 'dotenv';
 
 dotenv.config()
