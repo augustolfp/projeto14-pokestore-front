@@ -1,9 +1,11 @@
 import TopBar from "./TopBar";
 import ProductBox from "./ProductBox";
+import SideBar from "./SideBar/SideBar";
 
 export default function HomePage() {
     return(
         <>
+        <SideBar />
         <TopBar>
             <button>Botao generico</button>
         </TopBar>
