@@ -2,6 +2,7 @@ import TopBar from "./TopBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
 
@@ -14,7 +15,7 @@ export default function HomePage() {
           console.log(products)
           setProductList(products.data); 
         })()
-    });
+    }, []);
 
 
     return(
@@ -22,30 +23,50 @@ export default function HomePage() {
             <TopBar>
                 <button>Botao generico</button>
             </TopBar>
-            <div>
-            <input
-        type="text"
-        placeholder="Search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-            </div>
-            <Highlights>
-                IMAGENS EM DESTAQUI AQUI
-            </Highlights>
+            <Container>
+                <div>
+                <input
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+        />
+                </div>
+                <Highlights>
+                    IMAGENS EM DESTAQUI AQUI
+                </Highlights>
 
-            <ProductList>
-{                productList.map(product =>  
-<Item> 
-    <ProdImage><img src={product.image} /></ProdImage>
-    <ProdName>{product.name}</ProdName>
-    <ProdPrice>{product.price}</ProdPrice>
-</Item> )} 
-               
-            </ProductList>
+                <ProductList>
+                    {  productList.map(product =>  
+                        <Link to={`product/${product.id}`} ><Item> 
+                            <ProdImage><img src={product.image} /></ProdImage>
+                            <ProdName>{product.name}</ProdName>
+                            <ProdPrice>{product.price}</ProdPrice>
+                        </Item> </Link>)} 
+                
+                </ProductList>
+            </Container>
         </>
     );
 }
+
+const Container = styled.div `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    input {
+        width: 329px;
+        background: rgba(251, 215, 67, 0.4);
+        border-radius: 8px;
+        height: 30px;
+        color: #2774BA;
+        border: 0px;
+        padding: 20px;
+        margin-top: 15px;
+    }
+`
 
 const Highlights = styled.div `
 
@@ -74,6 +95,11 @@ const ProdImage = styled.div `
         display: flex;
         justify-content: center;
         align-items: center;
+
+        img {
+            max-height: 90px;
+            width: auto;
+        }
 `
 const ProdName = styled.div `
     font-style: normal;
