@@ -2,7 +2,7 @@ import "../assets/styles/reset.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import { useState } from "react";
-import HomePage from "./HomePage/HomePage";
+import HomePage from "./HomePage";
 import Login from "./Login";
 import Cadastro from "./Cadastro";
 import UserContext from "../contexts/UserContext";
