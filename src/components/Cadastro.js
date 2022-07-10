@@ -1,63 +1,74 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import UserContext from "../contexts/UserContext";
 import logo from "../img/logo.png";
 import dotenv from 'dotenv';
 
 dotenv.config()
 
-export default function Login() {
+export default function Cadastro() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confPassword, setConfPassword] = useState("");
+    const [name, setName] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
-    const {token, setToken} = useContext(UserContext);
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
 
-
-    async function signInUser(event){ 
+    async function registerUser (event) {
         event.preventDefault();
-        setLoading(true)
         setIsDisabled(true)
+        setLoading(true)
 
         const user = {
             email: `${email}`,
-            password: `${password}`
+            name: `${name}`,
+            password: `${password}`,
+            confirmPassword: `${confPassword}`
         }
+
+       if (confPassword === password) {
         try {
-        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`, user)
-        login(response)
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/cadastro`, user)
+        createUser(response) 
         }
-        catch (err){
+        catch(err) {
             treatError(err)
-        }       
+        }
+       }
+       else {
+        alert("A confirmação de senha não confere!")
+        setIsDisabled(false)
+        setLoading(false)
+       }
     }
 
-    function login(response) {
-        console.log(response.data)
-        setToken(response.data)
-        console.log(token)
-        navigate('/home')
+    function createUser() {
+        alert("Usuário cadastrado com sucesso")
+        navigate('/login', {email: `${email}`,
+        name: `${name}`,})
     }
 
     function treatError(err) {
         console.log(err)
-        alert(`${err.message}`)
+        alert(`${err.message}. Tente novamente!`)
         setIsDisabled(false)
         setLoading(false)
     }
+
 
     return (
         <Container>           
             <img src={logo} />
             <Form>                
-                <form action="#" onSubmit={signInUser}>            
-                    <input required disabled={isDisabled} type="email" id="emailInput" placeholder='E-mail' value={email} onChange={(e) => setEmail(e.target.value)} />              
-                    <input required disabled={isDisabled} type="password" id="passInput" placeholder='Senha' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <form action="#" onSubmit={registerUser}>            
+                <input disabled={isDisabled} type="text" id="nameInput" placeholder='Nome' value={name} required onChange={(e) => setName(e.target.value)} /> 
+                    <input disabled={isDisabled} type="email" id="emailInput" placeholder='E-mail' value={email} required onChange={(e) => setEmail(e.target.value)} />              
+                    <input disabled={isDisabled} type="password" id="passInput" placeholder='Senha' value={password} required onChange={(e) => setPassword(e.target.value)} />  
+                    <input disabled={isDisabled} type="password" id="confPassInput" placeholder='Confirme a senha' value={confPassword} required onChange={(e) => setConfPassword(e.target.value)} /> 
                     <button disabled={isDisabled} type="submit">
                         { loading ? 
                         <div className="loader">
@@ -68,7 +79,7 @@ export default function Login() {
                         </button>
                 </form>
             </Form>
-            <Link to="/cadastro">Primeira vez? Cadastre-se!</Link>
+            <Link to="/cadastro">Já tem uma conta? Entre aqui!</Link>
         </Container>
     )
  }
