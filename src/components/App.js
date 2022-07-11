@@ -12,8 +12,11 @@ export default function App() {
 
     const [token, setToken] = useState("");
     const [name, setName] = useState("");
+    const [cart, setCart] = useState([]);
     const [sideBarVisibility, setSideBarVisibility] = useState(false);
-    const contextValue = { token, setToken, name, setName, sideBarVisibility, setSideBarVisibility };
+    
+    const contextValue = { token, setToken, name, setName, sideBarVisibility, setSideBarVisibility, cart, setCart };
+
 
 
     return(
