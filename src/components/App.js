@@ -6,6 +6,7 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import Cadastro from "./Cadastro";
 import Produto from "./Produto";
+import Cart from "./Cart";
 import UserContext from "../contexts/UserContext";
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/product/:idProduct" element={<Produto />} />
+                    <Route path="/cart" element={<Cart />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

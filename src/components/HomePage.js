@@ -1,5 +1,4 @@
 import TopBar from "./TopBar";
-import ProductBox from "./ProductBox";
 import SideBar from "./SideBar/SideBar";
 import { useEffect, useState, useContext } from "react";
 import UserContext from "../contexts/UserContext";
@@ -26,9 +25,11 @@ export default function HomePage() {
     return(
         <>
             <TopBar>
+
                 <ShoppingCart onClick={() => navigate("/carrinho")}>
                     <IoCart />
                 </ShoppingCart>
+
             </TopBar>
 
             {sideBarVisibility && <SideBar />}
@@ -41,6 +42,7 @@ export default function HomePage() {
                     IMAGENS EM DESTAQUI AQUI
                 </Highlights>
                 <ProductList>
+
                     {
                         productList.length > 0 ? (
                             productList.map((product, index) =>  
@@ -62,6 +64,7 @@ export default function HomePage() {
                             <h4>Não há nenhum produto no momento!</h4>
                         )
                     } 
+
                 </ProductList>
             </Container>
         </>
