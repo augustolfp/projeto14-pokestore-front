@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useContext} from "react";
 import {IoPersonCircleOutline, IoSettings, IoBag, IoCart, IoCloseCircle} from 'react-icons/io5';
+import UserContext from "../../contexts/UserContext";
 
 export default function SideBarControlPanel() {
+    const {sideBarVisibility, setSideBarVisibility} = useContext(UserContext);
     return (
         <Container>
             <LoginBox>
@@ -10,7 +12,7 @@ export default function SideBarControlPanel() {
                     <IoPersonCircleOutline size={32}/>
                     <h3>Entre ou cadastre-se</h3>
                 </div>
-                <IoCloseCircle/>
+                <IoCloseCircle onClick={() => setSideBarVisibility(!sideBarVisibility)}/>
             </LoginBox>
             <OptionsBox>
                 <div>
