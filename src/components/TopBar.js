@@ -9,7 +9,7 @@ export default function TopBar(props) {
     return (
         <Container>
             <div>
-                <button onClick={() => setSideBarVisibility(!sideBarVisibility)}><IoMenu/></button>
+                <HamburgerMenu onClick={() => setSideBarVisibility(!sideBarVisibility)}><IoMenu/></HamburgerMenu>
                 <img src={logo} />
             </div>
             {props.children}
@@ -28,5 +28,18 @@ const Container = styled.div`
     div {
         display: flex;
         align-items: center;
+
+        * {
+            margin-left: 8px;
+        }
     }
+`
+
+const HamburgerMenu = styled.div`
+    color: #2774BA;
+
+    > svg {
+            width: 32px;
+            height: 32px;
+        }
 `

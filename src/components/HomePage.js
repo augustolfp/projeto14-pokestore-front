@@ -4,52 +4,67 @@ import { useEffect, useState, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import axios from "axios";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {IoCart} from 'react-icons/io5';
 
 
 export default function HomePage() {
 
+    const navigate = useNavigate();
     const [search, setSearch] = useState("");
     const [productList, setProductList] = useState([]);
     const {sideBarVisibility, setSideBarVisibility} = useContext(UserContext);
 
-    useEffect(() => {
-        (async () => {
+    useEffect( async () => {
           const products = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/products`);
           console.log(products)
           setProductList(products.data); 
-        })()
-    }, []);
+        }, []);
 
 
     return(
         <>
-
             <TopBar>
-                <Link to="/cart" ><button>Botao generico</button></Link>
+
+                <ShoppingCart onClick={() => navigate("/carrinho")}>
+                    <IoCart />
+                </ShoppingCart>
+
             </TopBar>
+
             {sideBarVisibility && <SideBar />}
+
             <Container>
                 <div>
-                <input
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-        />
+                    <input type="text" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <Highlights>
                     IMAGENS EM DESTAQUI AQUI
                 </Highlights>
-
                 <ProductList>
-                    {  productList.map(product =>  
-                        <Link to={`product/${product.id}`} ><Item> 
-                            <ProdImage><img src={product.image} /></ProdImage>
-                            <ProdName>{product.name}</ProdName>
-                            <ProdPrice>{`$${product.price}`}</ProdPrice>
-                        </Item> </Link>)} 
-                
+
+                    {
+                        productList.length > 0 ? (
+                            productList.map((product, index) =>  
+                                <Link key={index} to={`product/${product.id}`}>
+                                    <Item> 
+                                        <ProdImage>
+                                            <img src={product.image} />
+                                        </ProdImage>
+                                        <ProdName>
+                                            <h1>{product.name}</h1>
+                                        </ProdName>
+                                        <ProdPrice>
+                                            <h1>{product.price}</h1>
+                                        </ProdPrice>
+                                    </Item>
+                                </Link>
+                            )
+                        ) : (
+                            <h4>Não há nenhum produto no momento!</h4>
+                        )
+                    } 
+
                 </ProductList>
             </Container>
         </>
@@ -124,4 +139,12 @@ const ProdPrice = styled.div `
     font-size: 14px;
     line-height: 10px;
     color: #828282;
+`
+
+const ShoppingCart = styled.div`
+    > svg {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+    }
 `
