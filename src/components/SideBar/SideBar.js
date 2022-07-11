@@ -7,9 +7,9 @@ export default function SideBar() {
     return (
         <Container>
         <SideBarControlPanel />
-        <h2>alguma coisa</h2>
-        <h2>Outra coisa</h2>
-    </Container>
+            <h2>alguma coisa</h2>
+            <h2>Outra coisa</h2>
+        </Container>
     );
 }
 
@@ -21,4 +21,6 @@ const Container = styled.div`
     flex-direction: column;
     background-color: white;
     align-items: center;
+    width: 292px;
+    height: 100vh;
 `
