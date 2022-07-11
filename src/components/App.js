@@ -12,7 +12,8 @@ export default function App() {
 
     const [token, setToken] = useState("");
     const [name, setName] = useState("");
-    const contextValue = { token, setToken, name, setName };
+    const [cart, setCart] = useState([])
+    const contextValue = { token, setToken, name, setName, cart, setCart };
 
 
     return(
