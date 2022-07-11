@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
 export default function HomePage() {
 
     const [search, setSearch] = useState("");
@@ -20,6 +21,7 @@ export default function HomePage() {
 
     return(
         <>
+
             <TopBar>
                 <button>Botao generico</button>
             </TopBar>
