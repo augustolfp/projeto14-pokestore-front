@@ -41,7 +41,7 @@ export default function Login() {
         console.log(response.data)
         setToken(response.data)
         console.log(token)
-        navigate('/home')
+        navigate('/')
     }
 
     function treatError(err) {

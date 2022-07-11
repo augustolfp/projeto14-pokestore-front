@@ -73,6 +73,10 @@ const Container = styled.div `
         padding: 20px;
         margin-top: 15px;
     }
+
+    a, a:visited {
+        text-decoration: none;
+    }
 `
 
 const Highlights = styled.div `

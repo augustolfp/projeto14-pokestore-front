@@ -3,13 +3,20 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Produto(){
 
     const {idProduct} = useParams();
-    const [product, setProduct] = useState({})
-    const { cart, setCart } = useContext(UserContext)
-    const [counter, setCounter] = useState(0)
+    const [product, setProduct] = useState({});
+    const { token } = useContext(UserContext);
+    const [counter, setCounter] = useState(0);
+    const navigate = useNavigate();
+
+
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    }
 
     useEffect(() => {
         (async () => {
@@ -39,6 +46,24 @@ export default function Produto(){
         }
     }
 
+    async function postCart() {
+        const productToCart = {
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            id: idProduct,
+            quantity: counter
+        }
+
+        try {
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/carrinho`, productToCart, {headers})
+            navigate("/")
+        }
+        catch(err) {
+            alert("Você precisa estar logado para continuar com a compra")
+        }
+    }
+
 
 
     return (
@@ -60,6 +85,9 @@ export default function Produto(){
             <button onClick={incrementCounter}>+</button>
             </div>
            </Counter>
+           <Add>
+            <button onClick={postCart}>Adicionar ao carrinho</button>
+           </Add>
         </Container>
     )
 }
@@ -143,3 +171,19 @@ const Counter = styled.div`
         align-items: center;
     }
 `
+
+const Add = styled.div `
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 327px;
+        height: 56px;
+        margin: 15px 0;
+        background: #2774BA;
+        border-radius: 14px;
+        border: 0px;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+    `
