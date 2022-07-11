@@ -5,11 +5,13 @@ import { useEffect, useState, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import axios from "axios";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {IoCart} from 'react-icons/io5';
 
 
 export default function HomePage() {
 
+    const navigate = useNavigate();
     const [search, setSearch] = useState("");
     const [productList, setProductList] = useState([]);
     const {sideBarVisibility, setSideBarVisibility} = useContext(UserContext);
@@ -24,7 +26,9 @@ export default function HomePage() {
     return(
         <>
             <TopBar>
-                <button>Botao generico</button>
+                <ShoppingCart onClick={() => navigate("/carrinho")}>
+                    <IoCart />
+                </ShoppingCart>
             </TopBar>
 
             {sideBarVisibility && <SideBar />}
@@ -132,4 +136,12 @@ const ProdPrice = styled.div `
     font-size: 14px;
     line-height: 10px;
     color: #828282;
+`
+
+const ShoppingCart = styled.div`
+    > svg {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+    }
 `
