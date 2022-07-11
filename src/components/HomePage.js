@@ -1,5 +1,4 @@
 import TopBar from "./TopBar";
-import ProductBox from "./ProductBox";
 import SideBar from "./SideBar/SideBar";
 import { useEffect, useState, useContext } from "react";
 import UserContext from "../contexts/UserContext";
@@ -27,7 +26,7 @@ export default function HomePage() {
         <>
 
             <TopBar>
-                <button>Botao generico</button>
+                <Link to="/cart" ><button>Botao generico</button></Link>
             </TopBar>
             {sideBarVisibility && <SideBar />}
             <Container>
@@ -48,7 +47,7 @@ export default function HomePage() {
                         <Link to={`product/${product.id}`} ><Item> 
                             <ProdImage><img src={product.image} /></ProdImage>
                             <ProdName>{product.name}</ProdName>
-                            <ProdPrice>{product.price}</ProdPrice>
+                            <ProdPrice>{`$${product.price}`}</ProdPrice>
                         </Item> </Link>)} 
                 
                 </ProductList>

@@ -23,6 +23,7 @@ const Container = styled.div`
     align-items: center;
     background-color: #FBD743;
     color: #2774BA;
+    height: 64px;
 
     div {
         display: flex;
