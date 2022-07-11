@@ -13,6 +13,9 @@ export default function Cart() {
     const [total, setTotal] = useState(0);
     const {sideBarVisibility, setSideBarVisibility, token} = useContext(UserContext);
     const navigate = useNavigate();
+    const styleIon = {
+        fontSize: 26, paddingRight: "20px", cursor: "pointer"
+    }
 
     const headers = {
         Authorization: `Bearer ${token}`,
@@ -49,7 +52,7 @@ export default function Cart() {
         <>
 
             <TopBar>
-                <button>Botao generico</button>
+                <ion-icon style={ styleIon } name="arrow-back-outline" onClick={() => navigate("/")}></ion-icon>
             </TopBar>            
             {sideBarVisibility && <SideBar />}
             <Title>
@@ -57,23 +60,31 @@ export default function Cart() {
             </Title>
             <Container>
                 <ProductList>
-                    {  productList.map(product => 
-                    <>
-                        <Separator></Separator> 
-                        <Item>                            
-                            <Link to={`product/${product.id}`} >
-                                <ProdImage><img src={product.image} /></ProdImage>
-                            </Link>
-                            <div>
-                            <ProdName>{product.name}</ProdName>
-                            <ProdPrice>{`$${product.price}`}</ProdPrice>
-                            </div>
-                            <div>
-                            <ion-icon name="trash-outline" id={product.id} onClick={(e) => deleteItem(e.target.id)}></ion-icon>
-                            <div>{`Quantidade: ${product.quantity}`}</div>
-                            </div>
-                        </Item> 
-                    </>)}                 
+                {
+                        productList.length > 0 ? (
+                            productList.map((product, index) =>  
+                                <>
+                                <Separator></Separator> 
+                                <Item>                            
+                                    <Link to={`product/${product.id}`} >
+                                        <ProdImage><img src={product.image} /></ProdImage>
+                                    </Link>
+                                    <div>
+                                    <ProdName>{product.name}</ProdName>
+                                    <ProdPrice>{`$${product.price}`}</ProdPrice>
+                                    </div>
+                                    <div>
+                                    <ion-icon name="trash-outline" id={product.id} onClick={(e) => deleteItem(e.target.id)}></ion-icon>
+                                    <div>{`Quantidade: ${product.quantity}`}</div>
+                                    </div>
+                                </Item> 
+                            </>
+                            )
+                        ) : (
+                            <h4>Não há nenhum produto no carrinho ou você não está logado!</h4>
+                        )
+                    } 
+
                 </ProductList>
                 <Footer>
                     <div>
@@ -91,6 +102,10 @@ const Container = styled.div `
     align-items: center;
     gap: 20px;
     font-family: "Montserrat";
+
+    h4 {
+        color: #2774BA;
+    }
 
     input {
         width: 329px;
