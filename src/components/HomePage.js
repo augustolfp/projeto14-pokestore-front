@@ -34,13 +34,7 @@ export default function HomePage() {
 
             {sideBarVisibility && <SideBar />}
 
-            <Container>
-                <div>
-                    <input type="text" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
-                </div>
-                <Highlights>
-                    IMAGENS EM DESTAQUI AQUI
-                </Highlights>
+            <Container>                
                 <ProductList>
 
                     {
@@ -55,7 +49,7 @@ export default function HomePage() {
                                             <h1>{product.name}</h1>
                                         </ProdName>
                                         <ProdPrice>
-                                            <h1>{product.price}</h1>
+                                            <h1>{`$${product.price}`}</h1>
                                         </ProdPrice>
                                     </Item>
                                 </Link>
@@ -104,6 +98,7 @@ const ProductList = styled.div `
     flex-wrap: wrap;
     font-family: 'Montserrat';
     gap: 14px;
+    margin: 20px 0%;
 `
 
 const Item = styled.div `
