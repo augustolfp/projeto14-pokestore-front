@@ -25,7 +25,7 @@ export default function SideBarControlPanel() {
                     <IoBag/>
                     <h3>Meus pedidos</h3>
                 </div>
-                <div onClick={() => navigate("/carrinho")}>
+                <div onClick={() => navigate("/cart")}>
                     <IoCart/>
                     <h3>Meu carrinho</h3>
                 </div>

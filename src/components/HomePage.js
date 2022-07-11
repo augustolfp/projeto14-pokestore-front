@@ -26,7 +26,7 @@ export default function HomePage() {
         <>
             <TopBar>
 
-                <ShoppingCart onClick={() => navigate("/carrinho")}>
+                <ShoppingCart onClick={() => navigate("/cart")}>
                     <IoCart />
                 </ShoppingCart>
 
