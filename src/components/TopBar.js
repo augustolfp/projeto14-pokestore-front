@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/img/logo.png";
 import {IoMenu} from 'react-icons/io5';
+import UserContext from "../contexts/UserContext";
 
 export default function TopBar(props) {
+    const {sideBarVisibility, setSideBarVisibility} = useContext(UserContext);
     return (
         <Container>
             <div>
-                <button><IoMenu/></button>
+                <button onClick={() => setSideBarVisibility(!sideBarVisibility)}><IoMenu/></button>
                 <img src={logo} />
             </div>
             {props.children}

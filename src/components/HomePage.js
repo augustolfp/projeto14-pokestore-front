@@ -1,5 +1,8 @@
 import TopBar from "./TopBar";
-import { useEffect, useState } from "react";
+import ProductBox from "./ProductBox";
+import SideBar from "./SideBar/SideBar";
+import { useEffect, useState, useContext } from "react";
+import UserContext from "../contexts/UserContext";
 import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -9,6 +12,7 @@ export default function HomePage() {
 
     const [search, setSearch] = useState("");
     const [productList, setProductList] = useState([]);
+    const {sideBarVisibility, setSideBarVisibility} = useContext(UserContext);
 
     useEffect(() => {
         (async () => {
@@ -25,6 +29,7 @@ export default function HomePage() {
             <TopBar>
                 <button>Botao generico</button>
             </TopBar>
+            {sideBarVisibility && <SideBar />}
             <Container>
                 <div>
                 <input
