@@ -2,28 +2,30 @@ import styled from "styled-components";
 import React, {useContext} from "react";
 import {IoPersonCircleOutline, IoSettings, IoBag, IoCart, IoCloseCircle} from 'react-icons/io5';
 import UserContext from "../../contexts/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SideBarControlPanel() {
     const {sideBarVisibility, setSideBarVisibility} = useContext(UserContext);
+    const navigate = useNavigate();
     return (
         <Container>
             <LoginBox>
-                <div>
+                <div onClick={() => navigate("/login")}>
                     <IoPersonCircleOutline size={32}/>
                     <h3>Entre ou cadastre-se</h3>
                 </div>
                 <IoCloseCircle onClick={() => setSideBarVisibility(!sideBarVisibility)}/>
             </LoginBox>
             <OptionsBox>
-                <div>
+                <div onClick={() => navigate("/settings")}>
                     <IoSettings/>
                     <h3>Minha conta</h3>
                 </div>
-                <div>
+                <div onClick={() => navigate("/pedidos")}>
                     <IoBag/>
                     <h3>Meus pedidos</h3>
                 </div>
-                <div>
+                <div onClick={() => navigate("/carrinho")}>
                     <IoCart/>
                     <h3>Meu carrinho</h3>
                 </div>
@@ -33,6 +35,7 @@ export default function SideBarControlPanel() {
 }
 
 const Container = styled.div`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
