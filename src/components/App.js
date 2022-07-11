@@ -8,6 +8,7 @@ import Cadastro from "./Cadastro";
 import Produto from "./Produto";
 import Cart from "./Cart";
 import UserContext from "../contexts/UserContext";
+import Checkout from "./Checkout";
 
 export default function App() {
 
@@ -29,6 +30,7 @@ export default function App() {
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/product/:idProduct" element={<Produto />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/checkout" element={<Checkout />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
